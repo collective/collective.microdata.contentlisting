@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.microdata.contentlisting">
+
+  <five:registerPackage package="." />
+  
+  <include package="collective.microdata.core" />
+  <include package=".browser" />
+  
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.microdata.contentlisting"
+      directory="profiles/default"
+      description="Add microdata support to Plone content listing views"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+
+</configure>

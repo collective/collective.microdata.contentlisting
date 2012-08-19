@@ -1,0 +1,58 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="plone">
+    
+  <include package="plone.app.contentmenu" />
+
+  <browser:page
+      for="OFS.interfaces.IFolder"
+      name="folder_listing"
+      layer="..interfaces.IMicrodataListingLayer"
+      class=".view.ListingView"
+      template="templates/folder_listing.pt"
+      permission="zope2.View"
+      />
+  <browser:menuItem
+      for="OFS.interfaces.IFolder"
+      menu="plone_displayviews"
+      title="Standard view"
+      action="@@folder_listing"
+      description=""
+      />
+
+  <browser:page
+      for="OFS.interfaces.IFolder"
+      name="folder_summary_view"
+      layer="..interfaces.IMicrodataListingLayer"
+      class=".view.SummaryView"
+      template="templates/folder_summary_view.pt"
+      permission="zope2.View"
+      />
+  <browser:menuItem
+      for="OFS.interfaces.IFolder"
+      menu="plone_displayviews"
+      title="Summary view"
+      action="@@folder_summary_view"
+      description=""
+      />
+
+  <browser:page
+      for="*"
+      name="folder_listing_item"
+      layer="..interfaces.IMicrodataListingLayer"
+      class=".view.BaseItemListingView"
+      template="templates/folder_listing_item.pt"
+      permission="zope2.View"
+      />
+  <browser:page
+      for="*"
+      name="folder_summary_view_item"
+      layer="..interfaces.IMicrodataListingLayer"
+      class=".view.BaseItemListingView"
+      template="templates/folder_summary_view_item.pt"
+      permission="zope2.View"
+      />
+
+</configure>

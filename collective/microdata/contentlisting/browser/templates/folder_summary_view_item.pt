@@ -1,0 +1,85 @@
+                <div class="tileItem visualIEFloatFix"
+                     itemscope="itemscope"
+                     tal:define="item view/item;
+                                 microdata view/microdata;
+                                 item_object item/getObject;
+                                 site_properties context/portal_properties/site_properties;
+                                 item_type item/portal_type;
+                                 use_view_action site_properties/typesUseViewActionInListings|python:();
+                                 item_url item/getURL|item/absolute_url;
+                                 item_title_or_id item/pretty_title_or_id;
+                                 item_description item/Description;
+                                 item_start item/start|item/StartDate|nothing;
+                                 item_end item/end|item/EndDate|nothing;
+                                 toLocalizedTime nocall: context/@@plone/toLocalizedTime;
+                                 pas_member context/@@pas_member;
+                                 item_creator item/Creator;
+                                 navigation_root_url context/@@plone_portal_state/navigation_root_url;
+                                 item_modified item/ModificationDate;"
+                      tal:attributes="itemtype microdata/microdata_vocabulary"
+                      i18n:domain="plone">
+
+                    <a href="#"
+                       tal:condition="exists:item_object/image_thumb"
+                       tal:attributes="href python: item_type in use_view_action and item_url+'/view' or item_url">
+                        <img src="" alt=""
+                             tal:replace="structure python: path('nocall:item_object/tag')(scale='thumb', css_class='tileImage', itemprop='image')" />
+                    </a>
+
+                    <h2 class="tileHeadline"
+                        metal:define-macro="listitem">
+
+                        <a href="#"
+                           class="summary url"
+                           itemprop="url"
+                           tal:attributes="href python: item_type in use_view_action and item_url+'/view' or item_url;">
+                               <span itemprop="name"
+                                     tal:content="item_title_or_id">Item Title</span>
+                        </a>
+
+                    </h2>
+
+                    <div class="documentByLine" tal:condition="python: site_properties.allowAnonymousViewAbout or not isAnon">
+                    <tal:newsitem condition="python: item_type == 'News Item'">
+                        <tal:name tal:condition="item_creator"
+                            tal:define="author python:pas_member.info(item_creator)">
+                          <span class="documentAuthor" i18n:translate="label_by_author">
+                            by
+                          <a href="#"
+                             tal:attributes="href string:${navigation_root_url}/author/${item_creator}"
+                             tal:content="author/name_or_id"
+                             tal:omit-tag="not:author"
+                             i18n:name="author">
+                            Bob Dobalina
+                          </a>
+                          </span>
+                        </tal:name>
+                        &mdash;
+                        <span class="documentModified">
+                              <tal:mod i18n:translate="box_last_modified">
+                              last modified
+                              </tal:mod>
+                              <span tal:replace="python:toLocalizedTime(item_modified,long_format=1)">
+                                      August 16, 2001 at 23:35:59
+                              </span>
+                        </span>
+                    </tal:newsitem>
+                    </div>
+
+                    <p class="tileBody" tal:condition="item_description">
+                        <span class="description" tal:content="item_description" itemprop="description">
+                            description
+                        </span>
+                    </p>
+
+                    <p class="tileFooter">
+                        <a href=""
+                           tal:attributes="href python: item_type in use_view_action and item_url+'/view' or item_url;"> 
+                           <span class="hiddenStructure"><span tal:replace="item_title_or_id" /> - </span> 
+                           <span i18n:translate="read_more">Read More&hellip;</span> 
+                        </a>
+                    </p>
+
+                    <div class="visualClear"><!-- --></div>
+
+                </div>

@@ -1,0 +1,4 @@
+<layers>
+    <layer name="collective.microdata.contentlisting"
+           interface="collective.microdata.contentlisting.interfaces.IMicrodataListingLayer" />
+</layers>
