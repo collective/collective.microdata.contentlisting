@@ -6,7 +6,7 @@ from zope.component.interfaces import ComponentLookupError
 from Products.Five.browser import BrowserView
 from plone.memoize import view
 
-from collective.microdata.core.interfaces import ISchemaOrgThing
+from collective.microdata.core.interfaces import IMicrodataVocabulary
 
 class BaseListingView(BrowserView):
 
@@ -15,11 +15,11 @@ class BaseListingView(BrowserView):
     @view.memoize
     def get_microdata(self, brain):
         # look for a type-specific adapter, if any
-        adapter = queryAdapter(brain, interface=ISchemaOrgThing,
+        adapter = queryAdapter(brain, interface=IMicrodataVocabulary,
                                name=brain.microdata_itemtype)
         if not adapter:
             # fallback to basic Thing adapter
-            adapter = queryAdapter(brain, interface=ISchemaOrgThing,
+            adapter = queryAdapter(brain, interface=IMicrodataVocabulary,
                                    name=u'')            
         return adapter
 
