@@ -16,8 +16,12 @@ product could extend it for additional vocabularies.
 
 __ http://www.schema.org/Thing
 
-Limitation and know issue
-=========================
+An implementation example could be taken from looking at `collective.microdata.event`__
+
+__ http://pypi.python.org/pypi/collective.microdata.event
+
+Limitation and know issues
+==========================
 
 This package is a bit experimental (this is why is not part of the installation of
 ``collective.microdata.core``) and it overrides a couple of Plone views:

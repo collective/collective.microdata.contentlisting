@@ -17,5 +17,4 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-
 </configure>
