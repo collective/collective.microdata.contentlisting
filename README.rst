@@ -8,7 +8,7 @@ __ http://pypi.python.org/pypi/collective.microdata.core
 __ http://en.wikipedia.org/wiki/Microdata_%28HTML%29
 __ http://www.schema.org/
 
-You could like to install this product when you need to get a set of microdata information from your
+You could like to install this product when you need to get a set of microdata informations from your
 folder contents pages.
 
 However this product only provide basic views implementation for the `Thing`__ vocabulary. A 3rd party
@@ -23,16 +23,15 @@ __ http://pypi.python.org/pypi/collective.microdata.event
 Limitation and know issues
 ==========================
 
-This package is a bit experimental (this is why is not part of the installation of
-``collective.microdata.core``) and it overrides a couple of Plone views:
+This package is a bit experimental and it overrides a couple of Plone views:
 
 * "Standard view" (``folder_listing``)
 * "Summary view" (``folder_summary_view``)
 
-Also (right now) those views can't be used anymore for full objects (only brains).
+Also:
 
-The problem there is that we need to display contents inside folders in a different way for providing
-different microdata information.
+ * (right now) those views can't be used anymore for full objects (only brains).
+ * this is not working on Plone site root (original views will be loaded).
 
 How to extend
 =============

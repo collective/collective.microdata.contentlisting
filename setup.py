@@ -3,6 +3,8 @@ import os
 
 version = '0.1'
 
+tests_require = ['plone.app.testing']
+
 setup(name='collective.microdata.contentlisting',
       version=version,
       description="Folders and collections listing support for microdata in Plone",
@@ -25,6 +27,8 @@ setup(name='collective.microdata.contentlisting',
       namespace_packages=['collective', 'collective.microdata'],
       include_package_data=True,
       zip_safe=False,
+      tests_require=tests_require,
+      extras_require=dict(test=tests_require),
       install_requires=[
           'setuptools',
           'collective.microdata.core',
