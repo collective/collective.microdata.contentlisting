@@ -4,7 +4,7 @@ Introduction
 This package is a Plone add-on for sites where `collective.microdata.core`__ is installed. See the
 product's page for more information about `microdata`__ and `schema.org implementation`__.
 
-__ http://pypi.python.org/pypi/collective.microdata.core
+__ https://github.com/keul/collective.microdata.core
 __ http://en.wikipedia.org/wiki/Microdata_%28HTML%29
 __ http://www.schema.org/
 
@@ -18,7 +18,7 @@ __ http://www.schema.org/Thing
 
 An implementation example could be taken from looking at `collective.microdata.event`__
 
-__ http://pypi.python.org/pypi/collective.microdata.event
+__ http://plone.org/products/collective.microdata.event
 
 Limitation and know issues
 ==========================
