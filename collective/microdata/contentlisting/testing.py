@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import zope.component
+import zope.interface
+
 from zope.configuration import xmlconfig
 
-from Products.ZCatalog.interfaces import ICatalogBrain
+import zope.publisher.interfaces.browser
 
 from plone.testing import z2
 
 from plone.app.testing import PLONE_FIXTURE
-from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import applyProfile
@@ -16,9 +17,9 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 
 from collective.microdata.core.testing import MicrodataCore
-from collective.microdata.core.tests.base import NewsItemTestingMicrodataAdapter
-from collective.microdata.core.tests.base import NewsItemTestingMicrodataBrainAdapter
-from collective.microdata.core.interfaces import IMicrodataVocabulary
+
+import collective.microdata.contentlisting.interfaces
+import collective.microdata.contentlisting.tests.base
 
 class MicrodataContentListing(MicrodataCore):
 
@@ -32,6 +33,23 @@ class MicrodataContentListing(MicrodataCore):
                        collective.microdata.contentlisting,
                        context=configurationContext)
         z2.installProduct(app, 'collective.microdata.contentlisting')
+
+        zope.component.provideAdapter(
+            collective.microdata.contentlisting.tests.base.NewsItemTestingMicrodataFolderListingAdapter,
+            (zope.interface.Interface,
+             collective.microdata.contentlisting.interfaces.IMicrodataListingLayer),
+            provides=zope.publisher.interfaces.browser.IBrowserView,
+            name=u'http://schema.org/Book folder_listing_item'
+        )
+
+        zope.component.provideAdapter(
+            collective.microdata.contentlisting.tests.base.NewsItemTestingMicrodataFolderSummaryViewAdapter,
+            (zope.interface.Interface,
+             collective.microdata.contentlisting.interfaces.IMicrodataListingLayer),
+            provides=zope.publisher.interfaces.browser.IBrowserView,
+            name=u'http://schema.org/Book folder_summary_view_item'
+        )
+
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.microdata.contentlisting:default')

@@ -6,6 +6,7 @@
                                  site_properties context/portal_properties/site_properties;
                                  item_type item/portal_type;
                                  use_view_action site_properties/typesUseViewActionInListings|python:();
+                                 isAnon context/@@plone_portal_state/anonymous;
                                  item_url item/getURL|item/absolute_url;
                                  item_title_or_id item/pretty_title_or_id;
                                  item_description item/Description;

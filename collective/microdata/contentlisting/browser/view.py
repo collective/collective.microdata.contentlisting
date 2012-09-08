@@ -1,5 +1,7 @@
 # -*- coding: utf8 -*-
 
+from zope.interface import implements
+
 from zope.component import queryAdapter, getMultiAdapter
 from zope.component.interfaces import ComponentLookupError
 
@@ -7,6 +9,8 @@ from Products.Five.browser import BrowserView
 from plone.memoize import view
 
 from collective.microdata.core.interfaces import IMicrodataVocabulary
+
+from collective.microdata.contentlisting.interfaces import IItemListingView
 
 class BaseListingView(BrowserView):
 
@@ -48,7 +52,8 @@ class SummaryView(BaseListingView):
 
 class BaseItemListingView(BrowserView):
     """Base class for listing a single item"""
-    
+    implements(IItemListingView)
+
     def __init__(self, context, request):
         self.context = context
         self.request = request

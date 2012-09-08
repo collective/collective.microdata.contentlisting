@@ -3,13 +3,9 @@
 import unittest
 
 from zope import interface
-from zope.component import queryUtility, getAdapter
 
 from collective.microdata.contentlisting.testing import MICRODATA_CONTENTLISTING_INTEGRATION_TESTING
 from collective.microdata.core.interfaces import IMicrodataCoreLayer
-from collective.microdata.core.interfaces import IMicrodataVocabulary
-
-from collective.microdata.core.tests.base import ISchemaOrgMinimalBook
 
 from collective.microdata.contentlisting.interfaces import IMicrodataListingLayer
 
@@ -40,13 +36,27 @@ class TestMicrodataFolderListing(unittest.TestCase):
                                   title="A useless document",
                                   description="This will be ignored",
                                   text="Lorem ipsum")
-        self.folder.setLayout('@@folder_listing')
         request.set('ACTUAL_URL', 'http://nohost/plone/folder')
-    
+
     def test_folder_listing_view_microdata_present(self):
         folder = self.folder
+        folder.setLayout('@@folder_listing')
         self.assertTrue(folder().find('<dt itemscope="itemscope" itemtype="http://schema.org/Book">')>-1)
         self.assertTrue(folder().find('<dt itemscope="itemscope" itemtype="http://schema.org/Thing">')>-1)
 
+    def test_folder_listing_view_custom(self):
+        folder = self.folder
+        folder.setLayout('@@folder_listing')
+        self.assertTrue('Let\'s display the "The Lord of the Rings" book' in folder())
 
-        
+    def test_folder_summary_view_microdata_present(self):
+        folder = self.folder
+        folder.setLayout('@@folder_summary_view')
+        self.assertTrue(folder().find('<div class="tileItem visualIEFloatFix" itemscope="itemscope" itemtype="http://schema.org/Book">')>-1)
+        self.assertTrue(folder().find('<div class="tileItem visualIEFloatFix" itemscope="itemscope" itemtype="http://schema.org/Thing">')>-1)
+
+    def test_folder_summary_view_custom(self):
+        folder = self.folder
+        folder.setLayout('@@folder_summary_view')
+        self.assertTrue('Let\'s summarize the "The Lord of the Rings" book' in folder())
+
